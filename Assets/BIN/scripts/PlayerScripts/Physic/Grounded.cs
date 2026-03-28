@@ -17,6 +17,8 @@ public class Grounded : MonoBehaviour
     //Private
     private CharacterController _characterController;
     private Vector3 _rayStart;
+    //Public
+    public static Grounded Instance;
 
     public bool IsGrounded { get => _isGrounded; }
     public Vector3 RayStart { get => _rayStart; set => _rayStart = value; }
@@ -33,8 +35,12 @@ public class Grounded : MonoBehaviour
     // Update is called once per frame
 
     #endregion
-
     #region Unity LifeCycle
+    void Awake()
+    {
+        Instance = this;
+    }
+    
     void Start()
     {
         _characterController = GetComponentInParent<CharacterController>();

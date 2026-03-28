@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
-namespace Player
+namespace PhysicPlayer
 {
     public class Gravity : MonoBehaviour
     {
@@ -22,6 +22,7 @@ namespace Player
         CharacterController _characterController;
         private Vector3 _gravityVelocity;
         //PUBLIC
+        public static Gravity Instance;
         #endregion
         #region Default Informations
         void Reset()
@@ -34,8 +35,9 @@ namespace Player
         
         void Awake()
         {
-            
+            Instance = this;
         }
+
         void Start()
         {
             _characterController = GetComponentInParent<CharacterController>();
