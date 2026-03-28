@@ -1,0 +1,356 @@
+fileFormatVersion: 2
+guid: 12c01f6af2a934885a31122e1671f740
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 660e5843a89324c2fae6e8b7155edae9, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: small_robot_rig|CameraAction
+      takeName: small_robot_rig|CameraAction
+      internalID: 2778974871595630626
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: small_robot_rig|CameraAction.001
+      takeName: small_robot_rig|CameraAction.001
+      internalID: 1882422653904496062
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: small_robot_rig|small_robot_rigAction
+      takeName: small_robot_rig|small_robot_rigAction
+      internalID: -1200895753067402642
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: small_robot_rig|small_robot_rigAction.001
+      takeName: small_robot_rig|small_robot_rigAction.001
+      internalID: 4066847335619671009
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: small_bot(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: body_low
+      parentName: small_bot(Clone)
+      position: {x: -0, y: 0.0707065, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: small_robot_rig
+      parentName: small_bot(Clone)
+      position: {x: -0, y: 0.0707065, z: 0}
+      rotation: {x: -0.6619997, y: 0.18777636, z: 0.1436248, w: 0.7112443}
+      scale: {x: 100, y: 100, z: 100}
+    - name: heap
+      parentName: small_robot_rig
+      position: {x: -0, y: 0, z: 0.0040394366}
+      rotation: {x: 0.80185264, y: -0.07412298, z: 0.0880681, w: 0.58632934}
+      scale: {x: 1, y: 1, z: 1}
+    - name: heap.L
+      parentName: heap
+      position: {x: -0.0014391921, y: 0.0039051156, z: -0.0009954848}
+      rotation: {x: -0.22080931, y: 0.11675346, z: 0.6707494, w: 0.6983603}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: upper_leg.L
+      parentName: heap.L
+      position: {x: 0.000000002682209, y: 0.0021351203, z: 5.0291415e-10}
+      rotation: {x: 0.06842697, y: -0.6633716, z: 0.15559117, w: -0.7287299}
+      scale: {x: 1.0000004, y: 1.0000006, z: 1.0000005}
+    - name: lower_leg.L
+      parentName: upper_leg.L
+      position: {x: -2.2351741e-10, y: 0.0043593333, z: -3.259629e-10}
+      rotation: {x: -0.020421052, y: 0.0047338908, z: 0.00976576, w: 0.9997326}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
+    - name: foot.L
+      parentName: lower_leg.L
+      position: {x: 1.3969838e-10, y: 0.0043298644, z: -1.1641532e-10}
+      rotation: {x: -0.6467362, y: -0.01582283, z: 0.009193952, w: 0.76249427}
+      scale: {x: 0.9999998, y: 0.9999998, z: 0.9999997}
+    - name: foot.L_end
+      parentName: foot.L
+      position: {x: -0, y: 0.0032785784, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: heap.R
+      parentName: heap
+      position: {x: 0.0014391915, y: 0.003905115, z: -0.0009954855}
+      rotation: {x: -0.11717066, y: -0.2194799, z: -0.69328594, w: 0.6763537}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: upper_leg.R
+      parentName: heap.R
+      position: {x: 6.3329936e-10, y: 0.0021351203, z: 3.352761e-10}
+      rotation: {x: 0.11134544, y: 0.967025, z: 0.12670656, w: 0.1908149}
+      scale: {x: 0.9999998, y: 0.9999992, z: 0.9999998}
+    - name: lower_leg.R
+      parentName: upper_leg.R
+      position: {x: 4.656613e-10, y: 0.0043593342, z: 7.0780515e-10}
+      rotation: {x: -0.0024205684, y: 0.0000013923317, z: -0.0000000065192762, w: 0.9999971}
+      scale: {x: 1.0000001, y: 1.0000004, z: 0.9999994}
+    - name: foot.R
+      parentName: lower_leg.R
+      position: {x: 3.1664968e-10, y: 0.004329863, z: -3.72529e-10}
+      rotation: {x: -0.24551971, y: -0.059907008, z: 0.050507035, w: 0.96621954}
+      scale: {x: 1.0000001, y: 1.0000005, z: 0.99999917}
+    - name: foot.R_end
+      parentName: foot.R
+      position: {x: -0, y: 0.0032785784, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: gear2
+      parentName: heap
+      position: {x: 0.002547624, y: 0.004770755, z: -0.0055995435}
+      rotation: {x: -0.30844644, y: -0.49290225, z: -0.18393207, w: 0.7925132}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: gear2_end
+      parentName: gear2
+      position: {x: -0, y: 0.0018007731, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: gear1
+      parentName: heap
+      position: {x: 0.0024515486, y: 0.0032927494, z: -0.006211411}
+      rotation: {x: 0.5879379, y: 0.5879378, z: 0.39284733, w: -0.39284757}
+      scale: {x: 1, y: 1, z: 1}
+    - name: gear1_end
+      parentName: gear1
+      position: {x: -0, y: 0.001800773, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root
+      parentName: small_robot_rig
+      position: {x: -0, y: 0, z: -0.000707065}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: control_foot.L
+      parentName: root
+      position: {x: -0.0035706686, y: 0.0019987605, z: -0.0056247753}
+      rotation: {x: -0.97850186, y: 0.00002736121, z: 0.00009528873, w: -0.20623781}
+      scale: {x: 1, y: 1, z: 1}
+    - name: knee_pointer.L
+      parentName: control_foot.L
+      position: {x: 0.0000000035762786, y: 0.005674737, z: 0.0031789448}
+      rotation: {x: 0.082958326, y: -0.000000005726634, z: -0.012008562, w: 0.9964807}
+      scale: {x: 1, y: 1, z: 1}
+    - name: knee_pointer.L_end
+      parentName: knee_pointer.L
+      position: {x: -0, y: 0.002730342, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: control_foot.R
+      parentName: root
+      position: {x: 0.0035706686, y: 0.0019987605, z: 0.0045029875}
+      rotation: {x: -0.9700558, y: -0.02498512, z: -0.088631585, w: -0.22474864}
+      scale: {x: 1, y: 1, z: 1}
+    - name: knee_pointer.R
+      parentName: control_foot.R
+      position: {x: -0.0000000035762786, y: 0.0056747375, z: 0.0031789448}
+      rotation: {x: 0.08920191, y: -0.000000013038516, z: -0.011362471, w: 0.9959488}
+      scale: {x: 1, y: 1, z: 1}
+    - name: knee_pointer.R_end
+      parentName: knee_pointer.R
+      position: {x: -0, y: 0.002730342, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
