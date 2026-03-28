@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Manager;
 using TMPro;
 using UnityEngine;
 using Player.State;
@@ -13,35 +14,27 @@ using UnityEngine.SceneManagement;
 
 namespace Player
 {
-    public class Mov : MonoBehaviour
+    public class MoveController : MonoBehaviour
     {
         #region Champs
         //INSPECTOR
         [Header("Player Movement")]
-        //[SerializeField] ScriptablePlayer _player;
-        [SerializeField] float _smoothSpeed;
-        [SerializeField] float _gravitySpeed;
-        [Header("Ground_Damage_Movement")]
-        [SerializeField] float _surfaceMultiplier;
+        [SerializeField] ScriptablePlayer _player;
+        [SerializeField] Transform _playerTransform;
         [Header("Hit_Damage_Health")]
         [SerializeField] float _moveDamagePerSecond;
         [Header("Timer Movement")]
         [SerializeField] float _moveDuration;
         [SerializeField] float _moveCooldown;
         //PRIVATE
-        //private AudioManager _audioManager;
-        private Rigidbody _rb;
-        private Camera _camera;
+        private InputsManager _inputs;
         private PlayerStateMachine _playerStateMachine;
         private Grounded _grounded;
+        //private AudioManager _audioManager;
         //private HealthManager _healthManager;
         private Vector3 _moveInput;
-        private Vector3 _movement;
-        private float _speed;
         private float _moveTimeRemaining;
         private float _damagePerSecond;
-        private bool _canMove;
-        private bool _isMoving;
         // PUBLIC
         //PRIVATE
         CharacterController _characterController;
@@ -50,7 +43,9 @@ namespace Player
         #region Default Informations
         void Reset()
         {
-            
+            _moveDamagePerSecond = 0.02f;
+            _moveDuration = 0.5f;
+            _moveCooldown = 20f;
         }
         #endregion
         #region Unity LifeCycle
@@ -69,32 +64,51 @@ namespace Player
             }
             
             _playerStateMachine = PlayerStateMachine.Instance;
-            
-            //_audioManager = AudioManager.Instance;
+            _inputs = InputsManager.Instance;
             _grounded = Grounded.Instance;
-            //_healthManager = HealthManager.Instance;
-            /*_speed = _player.MoveSpeed;
+            
+            /*_audioManager = AudioManager.Instance;
+            _healthManager = HealthManager.Instance;
+            _speed = _player.MoveSpeed;
             _moveDuration = _player.MoveDuration;*/
 
             if (_moveDamagePerSecond == 0) _moveDamagePerSecond = 0.02f;
-            if (_smoothSpeed == 0) _smoothSpeed = 0.5f;
-            if (_surfaceMultiplier == 0) _surfaceMultiplier = 1f;
-            if (_gravitySpeed == 0) _gravitySpeed = 0.3f;
             if (_moveCooldown == 0) _moveCooldown = 20f;
             if (_moveDuration == 0) _moveDuration = 0.5f;
-            if (!_canMove) _canMove = true;
         }
-
         // Update is called once per frame
         void Update()
         {
-            
+            Move();
         }
         #endregion
         #region Methods
-        void FixedUpdate()
+
+        void Move()
         {
+            if (_characterController == null) return;
             
+            Vector2 input = _inputs.GetMove();
+            
+            // 🔄 Rotation (Q/D, flèches, stick gauche X)
+            float rotationInput = input.x;
+            float rotation = rotationInput * _player.RotationSpeed * Time.deltaTime;
+            _playerTransform.Rotate(Vector3.up, rotation);
+
+            // ⬆️⬇️ Déplacement (Z/S, flèches, stick gauche Y)
+            float moveInput = input.y;
+            Vector3 move = _playerTransform.forward * moveInput * _player.MoveSpeed;
+
+            // Application
+            _characterController.Move(move * Time.deltaTime);
+            
+            Moving();
+        }
+        void Moving()
+        {
+            //Déplacement perte de PV - Movement loss of HP
+            /*_healthManager.TakeDamage(Time.fixedDeltaTime * (_moveDamagePerSecond + _damagePerSecond));
+            _damagePerSecond = 0f;*/
         }
         void LateUpdate()
         {

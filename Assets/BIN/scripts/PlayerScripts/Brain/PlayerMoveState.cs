@@ -32,32 +32,25 @@ namespace Player.State
         
         public override void Update()
         {
-            /*bool HasInput = fsm.Inputs.GetMove().sqrMagnitude > 0.01f;
-            bool IsSlidingInvoluntary = fsm.Grounded.IsGrounded && fsm.Grounded.IsOnSlope && !HasInput;
-            bool IsSlidingVoluntary = fsm.Grounded.IsGrounded && fsm.Grounded.IsOnSlope && HasInput;
+            bool HasInput = fsm.Inputs.GetMove().sqrMagnitude > 0.01f;
             
-            if (!fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime <= 0f)
+            /*if (!fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime <= 0f)*/
+            if (!fsm.Grounded.IsGrounded)
             {
                 fsm.ChangeState(fsm._fallState);
-            }*/
+            }
             
             // Quand on s'arrete  → Idle - When we stop -> idle
-            /*if (fsm.Grounded.IsGrounded && !HasInput)
+            if (fsm.Grounded.IsGrounded && !HasInput)
             {
                 // fsm.Jump.IsJumping = false;
                 fsm.ChangeState(fsm._idleState);
             }
-            else if ((fsm.Grounded.IsGrounded && IsSlidingInvoluntary))
+            else if (fsm.Grounded.IsGrounded  && HasInput)
             {
-                fsm.Jump.IsJumping = false;
+                //fsm.Jump.IsJumping = false;
                 fsm.ChangeState(fsm._idleState);
             }
-            
-            if (fsm.Grounded.IsGrounded && fsm.Inputs.GetJump())
-            {
-                fsm.Jump.IsJumping = false;
-                fsm.ChangeState(fsm._jumpChargeState);
-            }*/
         }
         
         public override void Exit()
