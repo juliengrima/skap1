@@ -13,49 +13,52 @@ namespace Player.State
         public override void Enter()
         {
             fsm.SetAuthority(PlayerMovementAuthority.Move);
-            //fsm.Move.StartMove();
+           
         }
 
         public override void HandleInput()
         {
             if (!fsm.Grounded.IsGrounded) { return; } // On est en l'air → pas d'action sol
             _moveInput = fsm.Inputs.GetMove();
-            _isMoving = fsm.Grounded.IsGrounded && _moveInput.sqrMagnitude > 0.01f;
+            _isMoving = _moveInput.sqrMagnitude > 0.01f;
         }
         
         public override void FixedUpdate()
         {
-            if (!_isMoving) return;
-            _moveDirection = new Vector3(_moveInput.x, 0f, _moveInput.y);
-           // fsm.Move.Moving(_moveDirection);
+            
         }
         
         public override void Update()
         {
-            bool HasInput = fsm.Inputs.GetMove().sqrMagnitude > 0.01f;
+            Vector2 moveInput = fsm.MoveInput;
+            bool HasInput = moveInput.sqrMagnitude > 0.01f;
             
-            /*if (!fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime <= 0f)*/
+            // Quand on s'arrete  → Idle - When we stop -> idle
+            if (!HasInput)
+            {
+                fsm.ChangeState(fsm._idleState);
+                return;
+            }
+            
             if (!fsm.Grounded.IsGrounded)
             {
                 fsm.ChangeState(fsm._fallState);
+                return;
             }
-            
-            // Quand on s'arrete  → Idle - When we stop -> idle
-            if (fsm.Grounded.IsGrounded && !HasInput)
-            {
-                // fsm.Jump.IsJumping = false;
-                fsm.ChangeState(fsm._idleState);
-            }
-            else if (fsm.Grounded.IsGrounded  && HasInput)
-            {
-                //fsm.Jump.IsJumping = false;
-                fsm.ChangeState(fsm._idleState);
-            }
+            // Else stay in Move - Dynamic Animation
+            fsm.Move.Move();
+            fsm.headBob.IsMoving = true;
+            fsm.headBob.MoveAmount = moveInput.magnitude;
+            fsm.animator.SetFloat("X", moveInput.y);
+            fsm.animator.SetFloat("Y", moveInput.x);
         }
         
         public override void Exit()
         {
             fsm.SetAuthority(PlayerMovementAuthority.None);
+            fsm.animator.SetFloat("X", 0);
+            fsm.animator.SetFloat("Y", 0);
+            fsm.headBob.IsMoving = false;
         }
     }
 }

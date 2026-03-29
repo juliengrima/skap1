@@ -9,13 +9,12 @@ namespace Player.State
 
         public override void Enter()
         {
-            //animator.SetMoving(false);
+            fsm.animator.SetFloat("X", 0);
         }
         
         public override void HandleInput()
         {
-            // if (fsm.Inputs.GetMove().sqrMagnitude > 0.01f && fsm.Grounded.IsGrounded)
-            if (fsm.Inputs.GetMove().sqrMagnitude > 0.01f)
+            if (fsm.Grounded.IsGrounded && fsm.Inputs.GetMove().sqrMagnitude > 0.01f)
             {
                 fsm.ChangeState(new PlayerMoveState(fsm));
                 return;
@@ -27,15 +26,17 @@ namespace Player.State
                 fsm.ChangeState(new PlayerJumpChargeState(fsm));
                 return;
             }*/
+            
+            if (!fsm.Grounded.IsGrounded)
+            {
+                fsm.ChangeState(fsm._fallState);
+                return;
+            }
         }
 
         public override void Update()
         {
-            /*if (!fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime <= 0f)
-            if (!fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime <= 0f)
-            {
-                fsm.ChangeState(fsm._fallState);
-            }*/
+           
         }
 
         public override void Exit() {}

@@ -10,10 +10,11 @@ namespace Player.State
 
         public override void Update()
         {
-            /*if (fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime > 0.1f)
+            if (fsm.Grounded.IsGrounded)
             {
                 fsm.ChangeState(fsm._idleState); // ou Move si input
-            }*/
+                return;
+            }
         }
 
         public override void FixedUpdate() { }

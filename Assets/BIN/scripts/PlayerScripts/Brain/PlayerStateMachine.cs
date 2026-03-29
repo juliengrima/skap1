@@ -1,8 +1,7 @@
 using UnityEngine;
 using PhysicPlayer;
 using Manager;
-//using Entities;
-using Player;
+using Cameras;
 
 
 namespace Player.State
@@ -11,14 +10,17 @@ namespace Player.State
     {
         #region Champs
         //INSPECTOR
-        [Header("Player Entities")]
+        [Header("Player Controllers")]
+        [SerializeField] MoveController _move;
+        /*[SerializeField] JumpController _jump;*/
+        [Header("Player Animation")]
+        [SerializeField] Animator _animator;
+        [Header("Player Camera animation")]
+        [SerializeField] HeadBob _headBob;
         //PRIVATE
         private IPlayerState _currentState;
         private PlayerMovementAuthority _authority;
         private InputsManager _inputs;
-        private Rigidbody _rb;
-        /*private JumpController _jump;*/
-        /*private MoveController _move;*/
         private Grounded _grounded;
         /*private ScreenFaderManager _screenFaderManager;*/
         //PUBLIC
@@ -32,17 +34,22 @@ namespace Player.State
         public PlayerFallState _fallState { get; private set; }
         public PlayerMoveState _moveState { get; private set; }
         public PlayerJumpState _jumpState { get; private set; }
-        public PlayerDeathState _deathState { get; private set; }
+        private PlayerDeathState _deathState { get; set; }
         
         // FSM CONTROLLERS
         public InputsManager Inputs { get => _inputs; set => _inputs = value; }
-        public Rigidbody Rb { get => _rb; set => _rb = value; }
-        /*public JumpController Jump { get => _jump; set => _jump = value; }*/
+        //public CharacterController CharController { get => _characterController; set => _characterController = value; }
         public Grounded Grounded { get => _grounded; set => _grounded = value; }
-        /*public MoveController Move { get => _move; set => _move = value; }*/
+        public MoveController Move { get => _move; set => _move = value; }
+        /*public JumpController Jump { get => _jump; set => _jump = value; }*/
+        public Animator animator { get => _animator; set => _animator = value; }
+        public HeadBob headBob { get => _headBob; }
+        //FSM VARIABLES
+        public Vector2 MoveInput { get; private set; }
+
         /*public ScreenFaderManager ScreenFaderManager { get => _screenFaderManager; set => _screenFaderManager = value; }*/
         #endregion
-        #region Enumerator
+        /*#region Enumerator
         public enum PlayerState
         {
             Idle,
@@ -51,13 +58,20 @@ namespace Player.State
             Roll,
             Death
         }
-        #endregion
+        #endregion*/
         #region Unity LifeCycle
         // Start is called before the first frame update
         
         void Awake()
         {
             Instance = this;
+            _inputs = InputsManager.Instance;
+            _grounded = Grounded.Instance;
+            //_jump = JumpController.Instance;
+            //_screenFaderManager = ScreenFaderManager.Instance;
+            
+            if (_move == null)
+                _move = GetComponentInChildren<MoveController>();
             
             _idleState = new PlayerIdleState(this);
             _airborneState = new PlayerAirborneState(this);
@@ -68,23 +82,17 @@ namespace Player.State
         }
         void Start()
         { 
-            _inputs = InputsManager.Instance;
-            _grounded = Grounded.Instance;
-            //_jump = JumpController.Instance;
-            //_move = MoveController.Instance;
-            //_screenFaderManager = ScreenFaderManager.Instance;
-            
-            _rb = GetComponentInParent<Rigidbody>();
-            //_jump.OnEnable();
-            //_move.OnEnable();
-
+            //_characterController = GetComponentInParent<CharacterController>();
+            HealthManager.Instance.OnDeath += HandleDeath;
             ChangeState(_idleState);
         }
 
         // Update is called once per frame
         void Update()
         {
-            // Debug.Log($"STATE={CurrentState} AUTH={Authority}");
+            Debug.Log($"STATE={CurrentState} AUTH={Authority}");
+            MoveInput = Inputs.GetMove();
+            
             _currentState?.HandleInput();
             _currentState?.Update();
         }
@@ -98,6 +106,11 @@ namespace Player.State
         public void SetAuthority(PlayerMovementAuthority authority)
         {
             _authority = authority;
+        }
+        
+        void HandleDeath()
+        {
+            ChangeState(_deathState);
         }
         #endregion
         #region StatesMachine
