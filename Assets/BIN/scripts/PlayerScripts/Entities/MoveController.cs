@@ -24,17 +24,16 @@ namespace Player
         [Header("Hit_Damage_Health")]
         [SerializeField] float _moveDamagePerSecond;
         [Header("Timer Movement")]
-        [SerializeField] float _moveDuration;
-        [SerializeField] float _moveCooldown;
+        //[SerializeField] float _moveDuration;
+        //[SerializeField] float _moveCooldown;
         //PRIVATE
         private InputsManager _inputs;
-        private PlayerStateMachine _playerStateMachine;
-        private Grounded _grounded;
+        private HealthManager _healthManager;
+        // private PlayerStateMachine _playerStateMachine;
+        // private Grounded _grounded;
         //private AudioManager _audioManager;
         //private HealthManager _healthManager;
         private Vector3 _moveInput;
-        private float _moveTimeRemaining;
-        private float _damagePerSecond;
         // PUBLIC
         //PRIVATE
         CharacterController _characterController;
@@ -44,8 +43,8 @@ namespace Player
         void Reset()
         {
             _moveDamagePerSecond = 0.02f;
-            _moveDuration = 0.5f;
-            _moveCooldown = 20f;
+            //_moveDuration = 0.5f;
+           //_moveCooldown = 20f;
         }
         #endregion
         #region Unity LifeCycle
@@ -63,28 +62,27 @@ namespace Player
                 Debug.LogError("CharacterController introuvable dans les parents !");
             }
             
-            _playerStateMachine = PlayerStateMachine.Instance;
             _inputs = InputsManager.Instance;
-            _grounded = Grounded.Instance;
+            //_playerStateMachine = PlayerStateMachine.Instance;
+            //_grounded = Grounded.Instance;
             
-            /*_audioManager = AudioManager.Instance;
             _healthManager = HealthManager.Instance;
+            /*_audioManager = AudioManager.Instance;
             _speed = _player.MoveSpeed;
             _moveDuration = _player.MoveDuration;*/
 
             if (_moveDamagePerSecond == 0) _moveDamagePerSecond = 0.02f;
-            if (_moveCooldown == 0) _moveCooldown = 20f;
-            if (_moveDuration == 0) _moveDuration = 0.5f;
+            //if (_moveCooldown == 0) _moveCooldown = 20f;
+            //if (_moveDuration == 0) _moveDuration = 0.5f;
         }
         // Update is called once per frame
         void Update()
         {
-            Move();
+            //Move();
         }
         #endregion
         #region Methods
-
-        void Move()
+        public void Move()
         {
             if (_characterController == null) return;
             
@@ -101,14 +99,13 @@ namespace Player
 
             // Application
             _characterController.Move(move * Time.deltaTime);
-            
+
             Moving();
         }
         void Moving()
         {
             //Déplacement perte de PV - Movement loss of HP
-            /*_healthManager.TakeDamage(Time.fixedDeltaTime * (_moveDamagePerSecond + _damagePerSecond));
-            _damagePerSecond = 0f;*/
+            _healthManager.TakeDamage(Time.fixedDeltaTime * _moveDamagePerSecond);
         }
         void LateUpdate()
         {
