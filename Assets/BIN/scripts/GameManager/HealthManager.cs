@@ -1,3 +1,4 @@
+using System;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,6 +28,11 @@ namespace Manager
         {
             Instance = this;
            // _audioManager = AudioManager.Instance;
+        }
+
+        void Start()
+        {
+            _player.Life = _player.StartLife;
         }
 
         // Update is called once per frame
