@@ -12,8 +12,14 @@ namespace Player.State
         {
             if (fsm.Grounded.IsGrounded)
             {
-                fsm.ChangeState(fsm._idleState); // ou Move si input
-                return;
+                if (fsm.Inputs.GetMove().sqrMagnitude > 0.01f)
+                {
+                    fsm.ChangeState(fsm._moveState);
+                }
+                else
+                {
+                    fsm.ChangeState(fsm._idleState);
+                }
             }
         }
 

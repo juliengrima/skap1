@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758ef1994d53a4c92990d4fe57d70ecf, type: 3}
   m_Name: ScriptablePlayer
   m_EditorClassIdentifier: Assembly-CSharp::Player.ScriptablePlayer
-  _life: 100
+  _life: 80.04574
   _startLife: 100
-  _jumpForce: 5
+  _jumpForce: 3
   _moveSpeed: 3
   _rotationSpeed: 90

@@ -10,8 +10,6 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
-
 namespace Player
 {
     public class MoveController : MonoBehaviour
@@ -71,7 +69,7 @@ namespace Player
             _speed = _player.MoveSpeed;
             _moveDuration = _player.MoveDuration;*/
 
-            if (_moveDamagePerSecond == 0) _moveDamagePerSecond = 0.02f;
+            if (_moveDamagePerSecond == 0) _moveDamagePerSecond = 0.005f;
             //if (_moveCooldown == 0) _moveCooldown = 20f;
             //if (_moveDuration == 0) _moveDuration = 0.5f;
         }

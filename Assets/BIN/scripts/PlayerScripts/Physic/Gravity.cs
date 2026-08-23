@@ -15,14 +15,15 @@ namespace PhysicPlayer
     {
         #region Champs
         //INSPECTOR
-        [Header("CharacterController")]
         [Header("Gravity")]
         [SerializeField, Range(-20f, 0f)] float _gravityValue;
         //PRIVATE
-        CharacterController _characterController;
+        private CharacterController _characterController;
         private Vector3 _gravityVelocity;
+        private float _verticalVelocity;
         //PUBLIC
         public static Gravity Instance;
+        public float GravityValue { get => _gravityValue;  set => _gravityValue = value; }
         #endregion
         #region Default Informations
         void Reset()
@@ -36,17 +37,13 @@ namespace PhysicPlayer
         void Awake()
         {
             Instance = this;
-        }
-
-        void Start()
-        {
             _characterController = GetComponentInParent<CharacterController>();
             if (_characterController == null)
             {
                 Debug.LogError("CharacterController introuvable dans les parents !");
             }
         }
-
+        
         // Update is called once per frame
         void Update()
         {
@@ -60,17 +57,32 @@ namespace PhysicPlayer
         void ApplyGravity()
         {
             if (_characterController == null) return;
-            if (_characterController.isGrounded && _gravityVelocity.y < 0)
+            
+            // Maintient le joueur légèrement collé au sol.
+            // On ne remet pas la vitesse à -2 si le joueur monte.
+            if (_characterController.isGrounded && _verticalVelocity < 0f)
             {
-                _gravityVelocity.y = -2f; 
-                // petit "stick to ground" pour éviter les micro-sauts
+                _verticalVelocity = -2f;
             }
 
             // Appliquer la gravité
-            _gravityVelocity.y += _gravityValue * Time.deltaTime;
+            _verticalVelocity += _gravityValue * Time.deltaTime;
+            /*_gravityVelocity.y += _gravityValue * Time.deltaTime;*/
 
             // Appliquer le mouvement
-            _characterController.Move(_gravityVelocity * Time.deltaTime);
+            Vector3 verticalMove = Vector3.up * _verticalVelocity * Time.deltaTime;
+            _characterController.Move(verticalMove);
+            /*_characterController.Move(_gravityVelocity * Time.deltaTime);*/
+        }
+        
+        public void SetVerticalVelocity(float velocity)
+        {
+            _verticalVelocity = velocity;
+        }
+
+        public float GetVerticalVelocity()
+        {
+            return _verticalVelocity;
         }
         #endregion
     }

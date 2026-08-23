@@ -43,6 +43,16 @@ namespace Manager
         {
             return _playerInputs.Player.Move.ReadValue<Vector2>();
         }
+
+        public bool GetJumpPressed()
+        {
+            return _playerInputs.Player.Jump.WasPressedThisFrame();
+        }
+
+        public bool GetJumpHold()
+        {
+            return _playerInputs.Player.Jump.IsPressed();
+        }
         #endregion
     }
 

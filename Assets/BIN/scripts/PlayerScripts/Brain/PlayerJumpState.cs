@@ -9,35 +9,35 @@ namespace Player.State
         
         public override void Enter()
         {
+            base.Enter();
             fsm.SetAuthority(PlayerMovementAuthority.Jump);
             _jumpApplied = false;
-        }
-
-        public override void FixedUpdate()
-        {
-            if (_jumpApplied) return;
             
-           // fsm.Jump.PerformJump();
+            /*if (!fsm.Grounded.IsGrounded)
+            {
+                fsm.ChangeState(fsm._fallState);
+                return;
+            }*/
+            
+            fsm.Jump.PerformJump();
             _jumpApplied = true;
         }
         
         public override void Update()
         {
             if (!_jumpApplied) return;
-            /*if (fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime > 0.1f)
+            
+            // Le personnage vient de quitter le sol.
+            if (!fsm.Grounded.IsGrounded)
             {
-                fsm.ChangeState(fsm._idleState);
+                fsm.ChangeState(fsm._fallState); 
+                
             }
-            else if (!fsm.Grounded.IsGrounded && fsm.Grounded.GroundedTime <= 0f)
-            {
-                fsm.ChangeState(fsm._fallState);
-            }*/
         }
         
         public override void Exit()
         {
             fsm.SetAuthority(PlayerMovementAuthority.None);
-            //fsm.Jump.ResetCharge(); // Reset Sécurity
         }
     }
 }

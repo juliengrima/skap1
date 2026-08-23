@@ -12,7 +12,7 @@ namespace Player.State
         //INSPECTOR
         [Header("Player Controllers")]
         [SerializeField] MoveController _move;
-        /*[SerializeField] JumpController _jump;*/
+        [SerializeField] JumpController _jump;
         [Header("Player Animation")]
         [SerializeField] Animator _animator;
         [Header("Player Camera animation")]
@@ -41,37 +41,24 @@ namespace Player.State
         //public CharacterController CharController { get => _characterController; set => _characterController = value; }
         public Grounded Grounded { get => _grounded; set => _grounded = value; }
         public MoveController Move { get => _move; set => _move = value; }
-        /*public JumpController Jump { get => _jump; set => _jump = value; }*/
+        public JumpController Jump { get => _jump; set => _jump = value; }
         public Animator animator { get => _animator; set => _animator = value; }
         public HeadBob headBob { get => _headBob; }
         //FSM VARIABLES
         public Vector2 MoveInput { get; private set; }
-
-        /*public ScreenFaderManager ScreenFaderManager { get => _screenFaderManager; set => _screenFaderManager = value; }*/
+        public bool JumpInput { get; private set; }
         #endregion
-        /*#region Enumerator
-        public enum PlayerState
-        {
-            Idle,
-            Charge,
-            Jump,
-            Roll,
-            Death
-        }
-        #endregion*/
         #region Unity LifeCycle
         // Start is called before the first frame update
         
         void Awake()
         {
             Instance = this;
-            _inputs = InputsManager.Instance;
-            _grounded = Grounded.Instance;
-            //_jump = JumpController.Instance;
-            //_screenFaderManager = ScreenFaderManager.Instance;
             
             if (_move == null)
                 _move = GetComponentInChildren<MoveController>();
+            if (_jump == null)
+                _jump = GetComponentInChildren<JumpController>();
             
             _idleState = new PlayerIdleState(this);
             _airborneState = new PlayerAirborneState(this);
@@ -82,7 +69,9 @@ namespace Player.State
         }
         void Start()
         { 
-            //_characterController = GetComponentInParent<CharacterController>();
+            _inputs = InputsManager.Instance;
+            _grounded = Grounded.Instance;
+            
             HealthManager.Instance.OnDeath += HandleDeath;
             ChangeState(_idleState);
         }
@@ -92,6 +81,7 @@ namespace Player.State
         {
             Debug.Log($"STATE={CurrentState} AUTH={Authority}");
             MoveInput = Inputs.GetMove();
+            JumpInput = Inputs.GetJumpPressed();
             
             _currentState?.HandleInput();
             _currentState?.Update();

@@ -13,7 +13,6 @@ namespace Player.State
         public override void Enter()
         {
             fsm.SetAuthority(PlayerMovementAuthority.Move);
-           
         }
 
         public override void HandleInput()
@@ -21,30 +20,32 @@ namespace Player.State
             if (!fsm.Grounded.IsGrounded) { return; } // On est en l'air → pas d'action sol
             _moveInput = fsm.Inputs.GetMove();
             _isMoving = _moveInput.sqrMagnitude > 0.01f;
-        }
-        
-        public override void FixedUpdate()
-        {
             
+            if (fsm.Inputs.GetJumpPressed() && fsm.Grounded.IsGrounded)
+            {
+                fsm.Jump.StartBoost();
+            }
+            
+            /*if (fsm.Inputs.GetJumpPressed() && fsm.Grounded.IsGrounded)
+            {
+                fsm.ChangeState(fsm._jumpState);
+                return;
+            }*/
         }
         
         public override void Update()
         {
-            Vector2 moveInput = fsm.MoveInput;
-            bool HasInput = moveInput.sqrMagnitude > 0.01f;
+            fsm.Jump.UpdateBoost(fsm.Inputs.GetJumpHold());
+            fsm.Move.Move();
             
+            Vector2 moveInput = fsm.MoveInput;
             // Quand on s'arrete  → Idle - When we stop -> idle
-            if (!HasInput)
+            if (moveInput.sqrMagnitude <= 0.01f)
             {
                 fsm.ChangeState(fsm._idleState);
                 return;
             }
             
-            if (!fsm.Grounded.IsGrounded)
-            {
-                fsm.ChangeState(fsm._fallState);
-                return;
-            }
             // Else stay in Move - Dynamic Animation
             fsm.Move.Move();
             fsm.headBob.IsMoving = true;

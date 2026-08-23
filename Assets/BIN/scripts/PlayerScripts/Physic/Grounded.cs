@@ -16,6 +16,7 @@ namespace PhysicPlayer
         [SerializeField, Range(30, 60)] float _rotationXLimit;
         [Header("Layers Informations")]
         [SerializeField] LayerMask _layers;
+        [SerializeField] private float _groundedTime;
         //Private
         private CharacterController _characterController;
         private Vector3 _rayStart;
@@ -24,6 +25,9 @@ namespace PhysicPlayer
 
         public bool IsGrounded { get => _isGrounded; }
         public Vector3 RayStart { get => _rayStart; set => _rayStart = value; }
+
+        public float GroundedTime { get => _groundedTime; set => _groundedTime = value; }
+
         #endregion
         #region Unity LifeCycle
         // Start is called before the first frame update
@@ -31,6 +35,7 @@ namespace PhysicPlayer
         {
             _isGrounded = false;
             _rayDistance = 0.3f;
+            _groundedTime = 1.5f;
             //_player = transform.parent.GetComponentInChildren<Rigidbody>();
         }
 
@@ -55,8 +60,19 @@ namespace PhysicPlayer
         #endregion
         #region Methods
         private void Update()
-        {
-            //IsGroundedGravity();
+        { 
+            if (_characterController == null) return;
+            _isGrounded = _characterController.isGrounded;
+            
+            if (_isGrounded)
+            {
+                _groundedTime += Time.deltaTime;
+            }
+            else
+            {
+                _groundedTime = 0f;
+            }
+            
             GroundedRaycast();
         }
 
@@ -64,10 +80,9 @@ namespace PhysicPlayer
         {
             // Assurez-vous que la valeur Y est légèrement au-dessus du sol
             //Make sure Y value is is slightly above the ground
-            _rayStart = transform.position;
             // Lance un rayon vers le bas
             //Make Ray DownWard
-            
+            _rayStart = transform.position;
             if (Physics.Raycast(_rayStart, Vector3.down, out RaycastHit hit, _rayDistance, _layers))
             {
                 //Debug.Log($"Objet touché : {hit.collider.tag}");

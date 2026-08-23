@@ -14,29 +14,32 @@ namespace Player.State
         
         public override void HandleInput()
         {
+            if (fsm.Inputs.GetJumpPressed() && fsm.Grounded.IsGrounded)
+            {
+                /*fsm.ChangeState(new PlayerJumpState(fsm));*/
+                fsm.ChangeState(fsm._jumpState);
+                return;
+            }
+            
             if (fsm.Grounded.IsGrounded && fsm.Inputs.GetMove().sqrMagnitude > 0.01f)
             {
-                fsm.ChangeState(new PlayerMoveState(fsm));
+                fsm.ChangeState(fsm._moveState);
                 return;
             }
 
-            // if (fsm.Inputs.GetJump() && fsm.Grounded.IsGrounded)
-            /*if (fsm.Inputs.GetJump())
-            {
-                fsm.ChangeState(new PlayerJumpChargeState(fsm));
-                return;
-            }*/
-            
             if (!fsm.Grounded.IsGrounded)
             {
                 fsm.ChangeState(fsm._fallState);
-                return;
             }
         }
 
         public override void Update()
         {
-           
+            if (!fsm.Grounded.IsGrounded)
+            {
+                fsm.ChangeState(fsm._fallState);
+                return;
+            }
         }
 
         public override void Exit() {}
